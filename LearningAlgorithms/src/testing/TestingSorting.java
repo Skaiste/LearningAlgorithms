@@ -13,6 +13,11 @@ public class TestingSorting {
 		testIntArray(new InsertionSort());
 	}
 	
+	@Test
+	public void testMergeSortIntArr() {
+		testIntArray(new MergeSort());
+	}
+	
 	private void testIntArray(Sorting sorting){
 		
 		int[] array = {31, 41, 59, 26, 41, 58};
