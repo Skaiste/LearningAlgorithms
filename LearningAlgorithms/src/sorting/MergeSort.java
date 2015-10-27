@@ -1,13 +1,15 @@
 package sorting;
 
+import java.util.ArrayList;
+
 public class MergeSort implements Sorting{
 
 	@Override
-	public void sortIntArray(int[] a) {
-		sortIntArray(a, 0, a.length - 1);
+	public void sortIntArray(ArrayList<Integer> a) {
+		sortIntArray(a, 0, a.size() - 1);
 	}
 	
-	private void sortIntArray(int[] a, int p, int r){
+	private void sortIntArray(ArrayList<Integer> a, int p, int r){
 		if (p < r) {
 			// dividing array and sorting each part
 			int q = (p + r) / 2;
@@ -20,20 +22,20 @@ public class MergeSort implements Sorting{
 			int k = 0;		// for new array
 			int[] tmpArr = new int[r - p + 1];	// new temporary array
 			while ((i <= q) && (j <= r)){
-				if(a[i] < a[j])
-					tmpArr[k++] = a[i++];
+				if(a.get(i) < a.get(j))
+					tmpArr[k++] = a.get(i++);
 				else
-					tmpArr[k++] = a[j++];
+					tmpArr[k++] = a.get(j++);
 			}
 			while (i <= q)				// merging left elements
-				tmpArr[k++] = a[i++];
+				tmpArr[k++] = a.get(i++);
 			while (j <= r)
-				tmpArr[k++] = a[j++];
+				tmpArr[k++] = a.get(j++);
 			
 			// returning all elements from temporary array
 			i = p;
 			for (int tmp : tmpArr)
-				a[i++] = tmp;
+				a.set(i++, tmp);
 			
 		}
 	}

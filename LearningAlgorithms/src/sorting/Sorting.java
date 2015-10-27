@@ -1,6 +1,8 @@
 package sorting;
 
+import java.util.ArrayList;
+
 public interface Sorting {
 
-	public void sortIntArray (int[] a);
+	public void sortIntArray (ArrayList<Integer> a);
 }

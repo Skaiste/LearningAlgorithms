@@ -1,23 +1,24 @@
 package sorting;
 
+import java.util.ArrayList;
+
 public class InsertionSort implements Sorting{
 
-	public void sortIntArray(int[] a) {
-		if (a == null || a.length < 2)
+	public void sortIntArray(ArrayList<Integer> a) {
+		if (a == null || a.size() < 2)
 			return;
 		
 		// sorting begins
-		for (int j = 1; j < a.length; j++) {
+		for (int j = 1; j < a.size(); j++) {
 			
-			int key = a[j];
+			int key = a.get(j);
 			int i = j - 1;
 			
-			while (i >= 0 && a[i] > key) {
-				a[i+1] = a[i];
+			while (i >= 0 && a.get(i) > key) {
+				a.set(i + 1, a.get(i));
 				i -= 1;
 			}
-			
-			a[i + 1] = key;
+			a.set(i + 1, key);
 		}
 		// sorting ends
 		
