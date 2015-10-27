@@ -18,6 +18,21 @@ public class TestingSorting {
 		testIntArray(new MergeSort());
 	}
 	
+	@Test
+	public void testHeapSortIntArr() {
+		testIntArray(new HeapSort());
+	}
+	@Test
+	public void testHeapify() {
+
+		int[] array = {4,1, 3, 2, 16, 9, 10, 14, 8, 7};
+		int[] heapifiedArray = {16, 14, 10, 8, 7, 9, 3, 2, 4, 1};
+		
+		HeapSort heap = new HeapSort();
+		heap.heapifyIntArray(array);
+		assertArrayEquals("Heapifying integer array has failed", array, heapifiedArray);
+	}
+	
 	private void testIntArray(Sorting sorting){
 		
 		int[] array = {31, 41, 59, 26, 41, 58};
@@ -31,5 +46,11 @@ public class TestingSorting {
 		array = sortedArray.clone();
 		sorting.sortIntArray(array);
 		assertArrayEquals("Sorting integer array has failed", array, sortedArray);
+	}
+	
+	private void printIntArray(int[] a){
+		for (int i:a)
+			System.out.print(i + " ");
+		System.out.println();
 	}
 }
