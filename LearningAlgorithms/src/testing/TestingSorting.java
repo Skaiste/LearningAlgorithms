@@ -25,6 +25,12 @@ public class TestingSorting {
 	public void testHeapSortIntArr() {
 		testIntArray(new HeapSort());
 	}
+	
+	@Test
+	public void testD_aryHeapSortIntArr(){
+		testIntArray(new D_aryHeapSort(5));
+	}
+	
 	@Test
 	public void testHeapify() {
 
@@ -71,13 +77,13 @@ public class TestingSorting {
 		
 		// testing sorting of an unsorted array
 		sorting.sortIntArray(array);
-		assertEquals("Sorting integer array has failed", array, sortedArray);
+		assertEquals("Sorting integer array has failed", sortedArray, array);
 		
 		// testing sorting of sorted array
 		a = sA.clone();
 		array = fromArrayToAList(a);
 		sorting.sortIntArray(array);
-		assertEquals("Sorting integer array has failed", array, sortedArray);
+		assertEquals("Sorting integer array has failed", sortedArray, array);
 	}
 	
 	private ArrayList<Integer> fromArrayToAList(int[] a){
