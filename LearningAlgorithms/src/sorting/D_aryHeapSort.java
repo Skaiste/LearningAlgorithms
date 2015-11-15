@@ -97,4 +97,8 @@ public class D_aryHeapSort implements Sorting {
 		int j = i + 1;
 		return j/children - 1;
 	}
+	
+	public String toString(){
+		return "D-ary Heap sort";
+	}
 }

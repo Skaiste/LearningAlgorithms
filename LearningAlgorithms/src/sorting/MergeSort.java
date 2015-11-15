@@ -39,5 +39,9 @@ public class MergeSort implements Sorting{
 			
 		}
 	}
+	
+	public String toString(){
+		return "Merge sort";
+	}
 
 }

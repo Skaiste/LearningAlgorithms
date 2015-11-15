@@ -18,9 +18,33 @@ public class QuickSort implements Sorting {
 		sortIntArray(a, p, q);
 		sortIntArray(a, q + 1, r);
 	}
-	
+	/*
+	//		VERSION 2.0 (Lomuto's partitioning algorithm) 
+	//			pivot as last element ≈ 37,532,874 nanoseconds
+	//			pivot as middle ≈ 33,239,973 nanoseconds
 	private int partitionIntArr(ArrayList<Integer> a, int p, int r){
-		int pivot = getPivot(a, p, r);
+		int x = getPivot(a, p, r);
+		int i = p - 1;
+		
+		for (int j = p; j <= r; j++){
+			if (a.get(j) <= x){
+				i += 1;
+				swap(a, i, j);
+			}
+		}
+		
+		if (i < r)
+			return i;
+		else
+			return i - 1;
+	}
+	*/
+	//		VERSION 1.0  
+	//			pivot as first element ≈ 13,519,352 nanoseconds	-------------- FASTEST SO FAR!!!
+	//			pivot as middle ≈ 33,954,441 nanoseconds
+	private int partitionIntArr(ArrayList<Integer> a, int p, int r){
+		//int pivot = getPivot(a, p, r);
+		int pivot = a.get(p);
 		int i = p - 1, j = r + 1;
 		
 		while(true){
@@ -35,11 +59,7 @@ public class QuickSort implements Sorting {
 		}
 	}
 	
-	private void swap(ArrayList<Integer> a, int i, int j){
-		int tmp = a.get(i);
-		a.set(i, a.get(j));
-		a.set(j, tmp);
-	}
+	@SuppressWarnings("unused")
 	private int getPivot(ArrayList<Integer> a, int p, int r){
 		// getting approximate middle
 		double middle = middle(a, p, r);
@@ -67,5 +87,16 @@ public class QuickSort implements Sorting {
 		
 		// returning average
 		return (double) sum / a.size();
+	}
+	
+	
+	private void swap(ArrayList<Integer> a, int i, int j){
+		int tmp = a.get(i);
+		a.set(i, a.get(j));
+		a.set(j, tmp);
+	}
+	
+	public String toString(){
+		return "Quick sort";
 	}
 }

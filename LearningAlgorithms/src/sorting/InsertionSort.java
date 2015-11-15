@@ -23,5 +23,9 @@ public class InsertionSort implements Sorting{
 		// sorting ends
 		
 	}
+	
+	public String toString(){
+		return "Insertion sort";
+	}
 
 }

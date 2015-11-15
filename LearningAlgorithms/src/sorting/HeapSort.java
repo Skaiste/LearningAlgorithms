@@ -91,4 +91,8 @@ public class HeapSort implements Sorting{
 		int j = i + 1;
 		return j/2 - 1;
 	}
+	
+	public String toString(){
+		return "Heap sort";
+	}
 }

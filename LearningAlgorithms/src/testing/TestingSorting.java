@@ -6,7 +6,7 @@ import sorting.*;
 
 import static org.junit.Assert.*;
 
-import java.awt.event.FocusAdapter;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -14,37 +14,92 @@ public class TestingSorting {
 
 	@Test
 	public void testInsertionSortIntArr() {
-		testSmallIntArray(new InsertionSort());
-		testMediumIntArray(new InsertionSort());
-		testLargeIntArray(new InsertionSort());
+		InsertionSort sorting = new InsertionSort();
+		
+		long startTime = System.nanoTime();
+		
+		testSmallIntArray(sorting);
+		testMediumIntArray(sorting);
+		testLargeIntArray(sorting);
+		
+		long time = System.nanoTime() - startTime;
+		
+		System.out.println(displaySortTime(sorting, time));
 	}
 	
 	@Test
 	public void testMergeSortIntArr() {
-		testSmallIntArray(new MergeSort());
-		testMediumIntArray(new MergeSort());
-		testLargeIntArray(new MergeSort());
+		MergeSort sorting = new MergeSort();
+		
+		long startTime = System.nanoTime();
+		
+		testSmallIntArray(sorting);
+		testMediumIntArray(sorting);
+		testLargeIntArray(sorting);
+		
+		long time = System.nanoTime() - startTime;
+		
+		System.out.println(displaySortTime(sorting, time));
 	}
 	
 	@Test
 	public void testHeapSortIntArr() {
-		testSmallIntArray(new HeapSort());
-		testMediumIntArray(new HeapSort());
-		testLargeIntArray(new HeapSort());
+		HeapSort sorting = new HeapSort();
+		
+		long startTime = System.nanoTime();
+		
+		testSmallIntArray(sorting);
+		testMediumIntArray(sorting);
+		testLargeIntArray(sorting);
+		
+		long time = System.nanoTime() - startTime;
+		
+		System.out.println(displaySortTime(sorting, time));
 	}
 	
 	@Test
 	public void testD_aryHeapSortIntArr(){
-		testSmallIntArray(new D_aryHeapSort(5));
-		testMediumIntArray(new D_aryHeapSort(5));
-		testLargeIntArray(new D_aryHeapSort(5));
+		D_aryHeapSort sorting = new D_aryHeapSort(5);
+		
+		long startTime = System.nanoTime();
+		
+		testSmallIntArray(sorting);
+		testMediumIntArray(sorting);
+		testLargeIntArray(sorting);
+		
+		long time = System.nanoTime() - startTime;
+		
+		System.out.println(displaySortTime(sorting, time));
 	}
 	
 	@Test
 	public void testQuickSortIntArr() {
-		testSmallIntArray(new QuickSort());
-		testMediumIntArray(new QuickSort());
-		testLargeIntArray(new QuickSort());
+		QuickSort sorting = new QuickSort();
+		
+		long startTime = System.nanoTime();
+		
+		testSmallIntArray(sorting);
+		testMediumIntArray(sorting);
+		testLargeIntArray(sorting);
+		
+		long time = System.nanoTime() - startTime;
+		
+		System.out.println(displaySortTime(sorting, time));
+	}
+	
+	@Test
+	public void testStoogeSortIntArr() {
+		StoogeSort sorting = new StoogeSort();
+		
+		long startTime = System.nanoTime();
+		
+		testSmallIntArray(sorting);
+		testMediumIntArray(sorting);
+		testLargeIntArray(sorting);
+		
+		long time = System.nanoTime() - startTime;
+		
+		System.out.println(displaySortTime(sorting, time));
 	}
 	
 	@Test
@@ -60,6 +115,7 @@ public class TestingSorting {
 		heap.heapifyIntArray(array);
 		assertEquals("Heapifying integer array has failed", array, heapifiedArray);
 	}
+	
 	@Test
 	public void testHeapExtractMax() {
 		int[] a = {31, 41, 59, 26, 41, 58};
@@ -84,14 +140,20 @@ public class TestingSorting {
 		assertEquals("Heapifying integer array has failed", array, heapifiedArray);
 	}
 	
+	private String displaySortTime(Sorting sorting, long time){
+		DecimalFormat formatter = new DecimalFormat("#,###");
+		String s = sorting.toString() + " took ";
+		int pad = 35 - s.length();
+		s += String.format("%1$" + pad + "s", formatter.format(time));
+		s += "   nanoseconds to sort.";
+		return s;
+	}
+	
 	private void testSmallIntArray(Sorting sorting){
 		int[] a = {9, 59, 35, 59, 38, 72, 14, 92, 82, 79};
 		int[] sA = {9, 14, 35, 38, 59, 59, 72, 79, 82, 92};
 		
-		ArrayList<Integer> array = fromArrayToAList(a);
-		ArrayList<Integer> sortedArray = fromArrayToAList(sA);
-		
-		testIntArray(sorting, array, sortedArray);
+		testIntArray(sorting, a, sA);
 	}
 	private void testMediumIntArray(Sorting sorting){
 		int[] a = {760, 676, 366, 955, 141, 114, 690, 884, 658, 99, 383, 401, 464, 
@@ -111,14 +173,13 @@ public class TestingSorting {
 					820, 826, 828, 835, 849, 857, 871, 875, 877, 881, 884, 895, 911, 
 					920, 929, 933, 934, 939, 955, 998};
 		
+		testIntArray(sorting, a, sA);
+	}
+	@SuppressWarnings("unchecked")
+	private void testIntArray(Sorting sorting, int[] a, int[] sA){
 		ArrayList<Integer> array = fromArrayToAList(a);
 		ArrayList<Integer> sortedArray = fromArrayToAList(sA);
 		
-		testIntArray(sorting, array, sortedArray);
-	}
-	@SuppressWarnings("unchecked")
-	private void testIntArray(Sorting sorting, ArrayList<Integer> array, ArrayList<Integer> sortedArray){
-
 		// testing sorting of an unsorted array
 		sorting.sortIntArray(array);
 		assertEquals("Sorting integer array has failed", sortedArray, array);
@@ -135,6 +196,7 @@ public class TestingSorting {
 		return arrayList;
 	}
 	
+	@SuppressWarnings("unused")
 	private ArrayList<Integer> randomArray(int size, int from, int to){
 		ArrayList<Integer> array = new ArrayList<Integer>();
 		
@@ -276,10 +338,7 @@ public class TestingSorting {
 				9836, 9840, 9848, 9871, 9875, 9877, 9878, 9882, 9899, 9911, 9920, 9947, 9948, 9967, 9968, 9982, 9983, 
 				9996};
 		
-		ArrayList<Integer> array = fromArrayToAList(a);
-		ArrayList<Integer> sortedArray = fromArrayToAList(sA);
-		
-		testIntArray(sorting, array, sortedArray);
+		testIntArray(sorting, a, sA);
 	}
 	
 }
